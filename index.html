@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paypoint Example</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Paypoint Subscription link -->
+    <script src="https://multipay-sandbox.azure-api.net/hostedfield/v1/GetHostedFieldScript?subscription-key=26e551c1c2774d70a74564983c94c08f" type="text/javascript"></script>
+</head>
+<body class="bg-slate-100">
+    <div class="flex flex-col justify-center items-center p-8">
+        <!-- <h1 class="text-xl font-bold mb-4">Paypoint Example</h1> -->
+        <img class="w-[125px] m-6" src="/Pobl-logo.svg" />
+
+        <form class="flex flex-col bg-white rounded-lg shadow pt-8 pb-12 px-8 w-4/6"> 
+            <div class="flex justify-start items-center gap-3 mb-8">
+                <img class="w-12" src="/Visa_Brandmark_Blue_RGB_2021.png" alt="visa logo" />
+                <img class="w-12" src="/mc_symbol.svg" alt="visa logo" />
+            </div>
+
+            <div class="flex flex-row justify-start gap-16 w-full">
+                <div id="CardDetails" class="w-1/2">
+                    <p class="font-bold uppercase text-xs mb-3 text-slate-600 tracking-widest border-b-2 border-slate-100 pb-2">Card Details</p>
+                    <!-- Card Number - Hosted Field -->
+                    <div class="mb-6"> 
+                        <label for="card_number">Card Number</label> 
+                        <div class="hosted-field h-[50px]" id="card_number"></div> 
+                        <p id="hosted_field_message" class="mt-2 text-sm text-red-500 dark:text-gray-400"></p>
+                    </div> 
+
+                    <!-- CVV -->
+                    <div class="mb-6">
+                        <label for="card_cvv" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CVV</label>
+                        <input type="text" id="card_cvv" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="222">
+                    </div>
+
+                    <!-- Card Holder Name -->
+                    <div class="mb-6">
+                        <label for="cardholder_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Card Holder Name</label>
+                        <input type="text" id="cardholder_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Card Holder Name">
+                    </div>
+
+                    <!-- Expiry Date -->
+                    <div class="mb-6">
+                        <label for="card_expiry" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expiry Date</label>
+                        <input type="date" id="card_expiry" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+
+                </div>
+                <div id="BillingDetails" class="w-1/2">
+                    <p class="font-bold uppercase text-xs mb-3 text-slate-600 tracking-widest border-b-2 border-slate-100 pb-2">Billing Details</p>
+                    <div class="mb-6">
+                        <label for="billing_address1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address Line 1</label>
+                        <input type="text" id="billing_address1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    </div>
+                    <div class="mb-6">
+                        <label for="billing_address2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address Line 2</label>
+                        <input type="text" id="billing_address2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    </div>
+                    <div class="mb-6">
+                        <label for="billing_address3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address Line 3</label>
+                        <input type="text" id="billing_address3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    </div>
+                    <div class="mb-6">
+                        <label for="billing_city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
+                        <input type="text" id="billing_city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    </div>
+                    <div class="mb-6">
+                        <label for="billing_postcode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Postcode</label>
+                        <input type="text" id="billing_postcode" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    </div>
+                    <div class="mb-6">
+                        <label for="billing_country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
+                        <input type="text" id="billing_country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+            <p id="helper-text-explanation" class="text-center mt-2 text-sm text-gray-500 dark:text-gray-400 mb-4">We’ll never share your details. Read our <a href="#" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Privacy Policy</a>.</p>
+            <button id="paymentButton" onclick="handleSubmit()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+
+
+            <!-- <div class="form-group"> 
+                <label for="card_number">Card Number</label> 
+                <div class="hosted-field" id="card_number"></div> 
+            </div>  -->
+            <!-- <div class="form-group"> 
+            <label for="card_cvv">CVV</label> 
+            <div class="hosted-field"><input type="text" name="CVV" value="" id="card_cvv"/></div> 
+            </div> 
+            <div class="form-group"> 
+            <label for="cardholder_name">CardHolder Name</label> 
+            <div class="hosted-field"><input type="text" name="NameOnCard" value="" id="cardholder_name"/></div> 
+            </div> 
+            <div class="form-group"> 
+            <label for="card_expiry">Expiry Date</label> 
+            <div class="hosted-field"> 
+            <input type="text" name="ExpiryDate" value="" id="card_expiry"/></div> 
+            </div>  -->
+            <!-- <div class="form-group"> 
+            <input type="submit" id="paymentButton" value="Make Payment"/> 
+            </div>  -->
+        </form>
+
+        <img class="w-[125px] m-6" src="/poweredby.png" />
+    </div>
+</body>
+<script> 
+    const callbackFunction = (cardType, cardToken) => { 
+        // let hostedFieldErrorEl = document.getElementById('hosted_field_message')
+        // hostedFieldErrorEl.innerText = 'Valid Card Number'
+        // hostedFieldErrorEl.classList.add('text-emerald-500')
+        document.getElementById("cardTokenValue").value = cardToken; 
+        document.getElementById("cardTypeValue").value = cardType; 
+        console.log(cardToken, cardType)
+    }
+
+    const doOnHostedFieldErrorFunction = (status, statusText, errorMessage, errorCode) => { 
+        //Only returns status
+        // console.log(status, statusText, errorMessage, errorCode);
+        let hostedFieldErrorEl = document.getElementById('hosted_field_message')
+        hostedFieldErrorEl.innerText = status.errorMessage
+        hostedFieldErrorEl.classList.add('text-red-500')
+    } 
+
+    const handleSubmit = () => {
+        // Get Form Values
+        let data = {
+            // card_token: document.getElementById("cardTokenValue").value,
+            // card_type: document.getElementById("cardTypeValue").value,
+            card_cvv: document.getElementById('card_cvv').value,
+            cardholder_name: document.getElementById('cardholder_name').value,
+            card_expiry: document.getElementById('card_expiry').value,
+            billing_address1: document.getElementById('billing_address1').value,
+            billing_address2: document.getElementById('billing_address2').value,
+            billing_address3: document.getElementById('billing_address3').value,
+            billing_city: document.getElementById('billing_city').value,
+            billing_postcode: document.getElementById('billing_postcode').value,
+            billing_country: document.getElementById('billing_country').value
+        }
+
+        console.log(data)
+    }
+    
+    window.onload = function () { 
+        let token = null
+        let error = null
+        var _ = new PayPointHostedFields.HostedFields({ 
+            field: { 
+            placeHolder: 'card_number', 
+            style: { 
+                'width': '90%',
+                'color': '#606060', 
+                'padding': '0.625rem',
+                'font-size': '0.875rem',
+                'line-height': '1.25rem',
+                'border': '1px solid #606060', 
+                'background': '#fff', 
+                'border-color': 'rgb(209 213 219)',
+                'border-radius': '0.5rem'
+                }, 
+            errorStyle: { 
+                'border': '1px solid #ff0000', 
+                }
+            }, 
+            callback: callbackFunction, doOnHostedFieldError: doOnHostedFieldErrorFunction 
+        });
+    } 
+   </script>
+</html>
