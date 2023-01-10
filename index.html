@@ -84,60 +84,61 @@
 
         <img class="w-[125px] m-6" src="/poweredby.png" />
     </div>
-</body>
-<script> 
-    const callbackFunction = (cardType, cardToken) => { 
-        console.log('SUCCESS')
-    }
 
-    const doOnHostedFieldErrorFunction = (status, statusText, errorMessage, errorCode) => { 
-        //Only returns status
-        // console.log(status, statusText, errorMessage, errorCode);
-        let hostedFieldErrorEl = document.getElementById('hosted_field_message')
-        hostedFieldErrorEl.innerText = status.errorMessage
-        hostedFieldErrorEl.classList.add('text-red-500')
-    } 
-
-    const handleSubmit = () => {
-        // Get Form Values
-        let data = {
-            // card_token: document.getElementById("cardTokenValue").value,
-            // card_type: document.getElementById("cardTypeValue").value,
-            card_cvv: document.getElementById('card_cvv').value,
-            cardholder_name: document.getElementById('cardholder_name').value,
-            card_expiry: document.getElementById('card_expiry').value,
-            billing_address1: document.getElementById('billing_address1').value,
-            billing_address2: document.getElementById('billing_address2').value,
-            billing_address3: document.getElementById('billing_address3').value,
-            billing_city: document.getElementById('billing_city').value,
-            billing_postcode: document.getElementById('billing_postcode').value,
-            billing_country: document.getElementById('billing_country').value
-        }
-
-        console.log(data)
-    }
+    <script>
+        const handleSubmit = () => {
+            // Get Form Values
+            let data = {
+                // card_token: document.getElementById("cardTokenValue").value,
+                // card_type: document.getElementById("cardTypeValue").value,
+                card_cvv: document.getElementById('card_cvv').value,
+                cardholder_name: document.getElementById('cardholder_name').value,
+                card_expiry: document.getElementById('card_expiry').value,
+                billing_address1: document.getElementById('billing_address1').value,
+                billing_address2: document.getElementById('billing_address2').value,
+                billing_address3: document.getElementById('billing_address3').value,
+                billing_city: document.getElementById('billing_city').value,
+                billing_postcode: document.getElementById('billing_postcode').value,
+                billing_country: document.getElementById('billing_country').value
+            }
     
-    window.onload = function () {
-        var _ = new PayPointHostedFields.HostedFields({ 
-            field: { 
-            placeHolder: 'card_number', 
-            style: { 
-                'width': '90%',
-                'color': '#606060', 
-                'padding': '0.625rem',
-                'font-size': '0.875rem',
-                'line-height': '1.25rem',
-                'border': '1px solid #606060', 
-                'background': '#fff', 
-                'border-color': 'rgb(209 213 219)',
-                'border-radius': '0.5rem'
+            console.log(data)
+        }
+        
+        window.onload = function () {
+            const callbackFunction = (cardType, cardToken) => { 
+                console.log('SUCCESS')
+            }
+    
+            const doOnHostedFieldErrorFunction = (status, statusText, errorMessage, errorCode) => { 
+                //Only returns status
+                // console.log(status, statusText, errorMessage, errorCode);
+                let hostedFieldErrorEl = document.getElementById('hosted_field_message')
+                hostedFieldErrorEl.innerText = status.errorMessage
+                hostedFieldErrorEl.classList.add('text-red-500')
+            } 
+    
+            var _ = new PayPointHostedFields.HostedFields({ 
+                field: { 
+                placeHolder: 'card_number', 
+                style: { 
+                    'width': '90%',
+                    'color': '#606060', 
+                    'padding': '0.625rem',
+                    'font-size': '0.875rem',
+                    'line-height': '1.25rem',
+                    'border': '1px solid #606060', 
+                    'background': '#fff', 
+                    'border-color': 'rgb(209 213 219)',
+                    'border-radius': '0.5rem'
+                    }, 
+                errorStyle: { 
+                    'border': '1px solid #ff0000', 
+                    }
                 }, 
-            errorStyle: { 
-                'border': '1px solid #ff0000', 
-                }
-            }, 
-            callback: callbackFunction, doOnHostedFieldError: doOnHostedFieldErrorFunction 
-        });
-    } 
-   </script>
+                callback: callbackFunction, doOnHostedFieldError: doOnHostedFieldErrorFunction 
+            });
+        } 
+    </script>
+</body>
 </html>
