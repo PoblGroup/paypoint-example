@@ -105,19 +105,19 @@
             console.log(data)
         }
         
-        window.onload = function () {
-            const callbackFunction = (cardType, cardToken) => { 
-                console.log('SUCCESS')
-            }
-    
-            const doOnHostedFieldErrorFunction = (status, statusText, errorMessage, errorCode) => { 
-                //Only returns status
-                // console.log(status, statusText, errorMessage, errorCode);
-                let hostedFieldErrorEl = document.getElementById('hosted_field_message')
-                hostedFieldErrorEl.innerText = status.errorMessage
-                hostedFieldErrorEl.classList.add('text-red-500')
-            } 
-    
+        function callbackFunction(cardType, cardToken) { 
+            console.log('SUCCESS')
+        }
+
+        function doOnHostedFieldErrorFunction(status, statusText, errorMessage, errorCode) { 
+            //Only returns status
+            // console.log(status, statusText, errorMessage, errorCode);
+            let hostedFieldErrorEl = document.getElementById('hosted_field_message')
+            hostedFieldErrorEl.innerText = status.errorMessage
+            hostedFieldErrorEl.classList.add('text-red-500')
+        } 
+
+        window.onload = function () {    
             var _ = new PayPointHostedFields.HostedFields({ 
                 field: { 
                 placeHolder: 'card_number', 
